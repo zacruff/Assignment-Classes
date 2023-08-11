@@ -95,7 +95,7 @@ class DoctorManager:
                 found = True
                 break
         if not found:
-            print("Can't find the doctor...")
+            print("Can't find the doctor")
     
     def display_doctor_info(self, doctor):
         print(f"Doctor ID: {doctor.doctor_id}")
@@ -232,10 +232,10 @@ class PatientManager:
         for patient in self.patients:
             if patient.patient_id == edit_id:
                 print(f"Editing info for Patient ID: {patient.patient_id}")
-                patient.name = input("Enter New Name: ")
-                patient.disease = input("Enter New Disease: ")
-                patient.gender = input("Enter New Gender: ")
-                patient.age = input("Enter New Age: ")
+                patient.name = input("Enter a New Name: ")
+                patient.disease = input("Enter a New Disease: ")
+                patient.gender = input("Enter a New Gender: ")
+                patient.age = input("Enter a New Age: ")
                 
                 self.write_list_of_patients_to_file()
                 print("Patient information updated.")
