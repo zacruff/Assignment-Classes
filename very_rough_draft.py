@@ -122,7 +122,7 @@ class DoctorManager:
                 found = True
                 break
         if not found:
-            print("Cannot find the doctor...")
+            print("Cannot find the doctor")
     
     def display_doctors_list(self):
         for doctor in self.doctors:
@@ -217,7 +217,7 @@ class PatientManager:
                 found = True
                 break
         if not found:
-            print("Can't find the patient...")
+            print("Can't find the patient")
     
     def display_patient_info(self, patient):
         print(f"Patient ID: {patient.patient_id}")
@@ -242,7 +242,7 @@ class PatientManager:
                 found = True
                 break
         if not found:
-            print("Cannot find the patient...")
+            print("Cannot find the patient")
     
     def display_patients_list(self):
         for patient in self.patients:
