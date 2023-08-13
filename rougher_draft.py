@@ -13,39 +13,39 @@ class Doctor:
 
     def get_doctor_id(self):
         return self.doctor_id
-    def set_doctor_id(self):
-        self.doctor_id = new_doctor_id
-        return new_doctor_id
+    # def set_doctor_id(self):
+    #     self.doctor_id = new_doctor_id
+    #     return new_doctor_id
     
     def get_doctor_name(self):
         return self.doctor_name
-    def set_doctor_id(self):
-        self.doctor_name = new_doctor_name
-        return self.doctor_name
+    # def set_doctor_id(self):
+    #     self.doctor_name = new_doctor_name
+    #     return self.doctor_name
     
     def get_specialization(self):
         return self.specialization
-    def set__specialization(self):
-        self.specialization = new_specialization
-        return self.specialization
+    # def set__specialization(self):
+    #     self.specialization = new_specialization
+    #     return self.specialization
     
     def get_working_time(self):
         return self.working_time
-    def set_working_time(self):
-        self.working_time = new_working_time
-        return self.working_time
+    # def set_working_time(self):
+    #     self.working_time = new_working_time
+    #     return self.working_time
     
     def get_qualification(self):
         return self.qualification
-    def set_qualification(self):
-        self.qualification = new_qualification
-        return self.qualification
+    # def set_qualification(self):
+    #     self.qualification = new_qualification
+    #     return self.qualification
     
     def get_room_number(self):
         return self.room_number
-    def set_room_number(self):
-        self.room_number = new_room_number
-        return self.room_number
+    # def set_room_number(self):
+    #     self.room_number = new_room_number
+    #     return self.room_number
     
     def __str__(self):
         return f'{self.doctor_id}_{self.doctor_name}_{self.specialization}_{self.working_time}_{self.qualification}_{self.room_number}'
@@ -62,17 +62,17 @@ class DoctorManager:
         return doctor.__str__()
     
     def enter_dr_info(self):
-        doctor_id = input("Enter the doctor's ID: ")
+        doctor_id = input("\nEnter the doctor's ID: ")
         doctor_name = input("Enter the doctor's name: ")
         specialization = input("Enter the doctor's specialization: ")
         working_time = input("Enter the doctor's timing (e.g., 7am-10pm): ")
         qualification = input("Enter the doctor's qualification: ")
         room_number = input("Enter the doctor's room number: ")
-        new_doctor = Doctor(doctor_id, doctor_name, specialization, working_time, qualification, room_number)
-        return new_doctor
+        doctor = Doctor(doctor_id, doctor_name, specialization, working_time, qualification, room_number)
+        return doctor
 
     def read_doctors_file(self):
-        with open("F:/Documents/Coding/Assignment---Classes/project - classes/doctors.txt", "r") as file:
+        with open("project - classes/doctors.txt", "r") as file:
             for line in file:
                 doctor_id, doctor_name, specialization, working_time, qualification, room_number = line.strip().split("_")
                 doctor = Doctor(doctor_id, doctor_name, specialization, working_time, qualification, room_number)
@@ -84,7 +84,7 @@ class DoctorManager:
             if id == doctor.doctor_id:
                 self.display_doctor_info(doctor)
                 return
-        print("Can't find the doctor with the same ID on the system.\n")
+        print("Can't find the doctor with the same ID on the system.")
     
     def search_doctor_by_name(self):
         name = input("\nEnter the doctor name: ")
@@ -92,15 +92,15 @@ class DoctorManager:
             if name == doctor.doctor_name:
                 self.display_doctor_info(doctor)
                 return
-        print("Can't find the doctor with the same name on the system.\n")
+        print("Can't find the doctor with the same name on the system.")
 
     @staticmethod            
     def display_doctor_info(doctor):
         print(f"\n{'ID':<8}{'Name':<16}{'Specialization':<20}{'Timing':<16}{'Qualification':<20}{'Room Number'}\n")
-        print(f"{doctor.doctor_id:<8}{doctor.doctor_name:<16}{doctor.specialization:<20}{doctor.working_time:<16}{doctor.qualification:<20}{doctor.room_number}\n")
+        print(f"{doctor.doctor_id:<8}{doctor.doctor_name:<16}{doctor.specialization:<20}{doctor.working_time:<16}{doctor.qualification:<20}{doctor.room_number}")
 
     def edit_doctor_info(self):
-        id = input("Enter the Doctor ID: ")
+        id = input("\nPlease enter the ID of the doctor that you want to edit their information: ")
         for doctor in self.doctor_list:
             if id == doctor.doctor_id:
                 doctor.doctor_name = input("Enter new name: ")
@@ -111,7 +111,7 @@ class DoctorManager:
                 self.write_list_of_doctors_to_file()
                 print(f"\nDoctor whose ID is {doctor.doctor_id} has been edited.")
                 return
-        print("Can't find the doctor with the same ID on the system.\n")
+        print("Can't find the doctor with the same ID on the system.")
 
     def display_doctors_list(self):
         for doctor in self.doctor_list:
@@ -123,17 +123,21 @@ class DoctorManager:
             print(f"{d_id:<8}{doctor.doctor_name:<16}{specialization:<20}{timing:<16}{qualification:<20}{room}\n")
 
     def write_list_of_doctors_to_file(self):
-        with open("F:/Documents/Coding/Assignment---Classes/project - classes/doctors.txt", "w") as file:
+        with open("project - classes/doctors.txt", "w") as file:
             for doctor in self.doctor_list:
                 formatteddoctor = self.format_dr_info(doctor)
-                file.write(f'{formatteddoctor}\n')
+                file.write(f'{formatteddoctor}'+'\n')
 
     def add_dr_to_file(self):
         doctor = self.enter_dr_info()
         formatteddoctor = self.format_dr_info(doctor)
         self.doctor_list.append(formatteddoctor)
-        with open("F:/Documents/Coding/Assignment---Classes/project - classes/doctors.txt", "a") as file:
-            file.write(f"{formatteddoctor}\n")
+        with open("project - classes/doctors.txt") as file:
+            text = file.read()
+        with open("project - classes/doctors.txt", "a") as file:
+            if not text.endswith('\n'):
+                file.write('\n')
+            file.write(f"{formatteddoctor}")
         print(f"\nDoctor whose ID is {doctor.doctor_id} has been added.")
 
 # ############################################# Class #3: Patient ########################################################### #
@@ -148,33 +152,33 @@ class Patient:
     
     def get_patient_id(self):
         return self.patient_id
-    def set_patient_id(self):
-        self.patient_id = new_patient_id
-        return set_patient_id
+    # def set_patient_id(self):
+    #     self.patient_id = new_patient_id
+    #     return set_patient_id
     
     def get_patient_name(self):
         return self.patient_id
-    def set_patient_name(self):
-        self.patient_name = new_patient_name
-        return self.patient_name
+    # def set_patient_name(self):
+    #     self.patient_name = new_patient_name
+    #     return self.patient_name
     
     def get_disease(self):
         return self.disease
-    def set_disease(self):
-        self.disease = new_disease
-        return self.disease
+    # def set_disease(self):
+    #     self.disease = new_disease
+    #     return self.disease
     
     def get_gender(self):
         return self.gender
-    def set_gender(self):
-        self.gender = new_gender
-        return self.gender
+    # def set_gender(self):
+    #     self.gender = new_gender
+    #     return self.gender
     
     def get_age(self):
         return self.age
-    def set_age(self):
-        self.age = new_age
-        return self.age
+    # def set_age(self):
+    #     self.age = new_age
+    #     return self.age
     
     def __str__(self):
         return f'{self.patient_id}_{self.patient_name}_{self.disease}_{self.gender}_{self.age}'
@@ -191,7 +195,7 @@ class PatientManager:
         return patient.__str__()
     
     def enter_patient_info(self):
-        patient_id = input("Enter Patient ID: ")
+        patient_id = input("\nEnter Patient ID: ")
         name = input("Enter Patient Name: ")
         disease = input("Enter Disease: ")
         gender = input("Enter Gender: ")
@@ -200,14 +204,14 @@ class PatientManager:
         return new_patient
 
     def read_patients_file(self):
-        with open("F:/Documents/Coding/Assignment---Classes/project - classes/patients.txt", "r") as file:
+        with open("project - classes/patients.txt", "r") as file:
             for line in file:
                 patient_id, patient_name, disease, gender, age = line.strip().split("_")
                 patient = Patient(patient_id, patient_name, disease, gender, age)
                 self.patient_list.append(patient)
 
     def search_patient_by_id(self):
-        id = input("Enter the patient ID: ")
+        id = input("\nEnter the patient ID: ")
         for patient in self.patient_list:
             if id == patient.patient_id:
                 self.display_patient_info(patient)
@@ -216,11 +220,11 @@ class PatientManager:
 
     @staticmethod            
     def display_patient_info(patient):
-        print(f"{'ID':<4}{'Name':<16}{'Disease':<12}{'Gender':<8}{'Age'}")
-        print(f"{patient.patient_id:<4}{patient.patient_name:<16}{patient.disease:<12}{patient.gender:<8}{patient.age}")
+        print(f"\n{'ID':<4}{'Name':<16}{'Disease':<12}{'Gender':<8}{'Age'}\n")
+        print(f"{patient.patient_id:<4}{patient.patient_name:<16}{patient.disease:<12}{patient.gender:<8}{patient.age}\n")
 
     def edit_patient_info_by_id(self):
-        id = input("Enter the patient ID: ")
+        id = input("\nPlease enter the ID of the Patient that you want to edit their information: ")
         for patient in self.patient_list:
             if id == patient.patient_id:
                 patient.patient_name = input("Enter patient name: ")
@@ -228,26 +232,32 @@ class PatientManager:
                 patient.gender = input("Enter gender: ")
                 patient.age = input("Enter age: ")
                 self.write_list_of_patients_to_file()
+                print(f"\nPatient whose ID is {patient.patient_id} has been edited.")
                 return
         print("Can't find the patient with the same ID on the system.")
 
     def display_patients_list(self):
         for patient in self.patient_list:
             pid = patient.patient_id.upper()
-            print(f"{pid:<4}{patient.patient_name:<16}{patient.disease:<12}{patient.gender:<8}{patient.age}")
+            print(f"{pid:<4}{patient.patient_name:<16}{patient.disease:<12}{patient.gender:<8}{patient.age}\n")
 
     def write_list_of_patients_to_file(self):
-        with open("F:/Documents/Coding/Assignment---Classes/project - classes/patients.txt", "w") as file:
+        with open("project - classes/patients.txt", "w") as file:
             for patient in self.patient_list:
                 formattedpatient = self.format_patient_info_for_file(patient)
-                file.write(f'{formattedpatient}\n')
+                file.write(f'{formattedpatient}'+'\n')
 
     def add_patient_to_file(self):
         patient = self.enter_patient_info()
         formattedpatient = self.format_patient_info_for_file(patient)
         self.patient_list.append(formattedpatient)
-        with open("F:/Documents/Coding/Assignment---Classes/project - classes/patients.txt", "a") as file:
-            file.write(f"{formattedpatient}\n")
+        with open("project - classes/patients.txt") as file:
+            text = file.read()
+        with open("project - classes/patients.txt", "a") as file:
+            if not text.endswith("\n"):
+                file.write("\n")
+            file.write(f"{formattedpatient}")
+        print(f"\nPatient whose ID is {patient.patient_id} has been added.")
 
 # ############################################# Class #5: Management: Methods ########################################################### #
 
@@ -297,7 +307,7 @@ class Management:
                         print("\n")
                         break
             elif menu_option == 3:
-                print("\nThank you for using the program. Bye!")
+                print("Thank you for using the program. Bye!")
                 break
 
 manager = Management()
