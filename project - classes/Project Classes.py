@@ -72,7 +72,7 @@ class DoctorManager:
         return doctor
 
     def read_doctors_file(self):
-        with open("project - classes/doctors.txt", "r") as file:
+        with open("doctors.txt", "r") as file:
             for line in file:
                 doctor_id, doctor_name, specialization, working_time, qualification, room_number = line.strip().split("_")
                 doctor = Doctor(doctor_id, doctor_name, specialization, working_time, qualification, room_number)
@@ -123,7 +123,7 @@ class DoctorManager:
             print(f"{d_id:<8}{doctor.doctor_name:<16}{specialization:<20}{timing:<16}{qualification:<20}{room}\n")
 
     def write_list_of_doctors_to_file(self):
-        with open("project - classes/doctors.txt", "w") as file:
+        with open("doctors.txt", "w") as file:
             for doctor in self.doctor_list:
                 formatteddoctor = self.format_dr_info(doctor)
                 file.write(f'{formatteddoctor}'+'\n')
@@ -132,9 +132,9 @@ class DoctorManager:
         doctor = self.enter_dr_info()
         formatteddoctor = self.format_dr_info(doctor)
         self.doctor_list.append(formatteddoctor)
-        with open("project - classes/doctors.txt") as file:
+        with open("doctors.txt") as file:
             text = file.read()
-        with open("project - classes/doctors.txt", "a") as file:
+        with open("doctors.txt", "a") as file:
             if not text.endswith('\n'):
                 file.write('\n')
             file.write(f"{formatteddoctor}")
@@ -204,7 +204,7 @@ class PatientManager:
         return new_patient
 
     def read_patients_file(self):
-        with open("project - classes/patients.txt", "r") as file:
+        with open("patients.txt", "r") as file:
             for line in file:
                 patient_id, patient_name, disease, gender, age = line.strip().split("_")
                 patient = Patient(patient_id, patient_name, disease, gender, age)
@@ -242,7 +242,7 @@ class PatientManager:
             print(f"{pid:<4}{patient.patient_name:<16}{patient.disease:<12}{patient.gender:<8}{patient.age}\n")
 
     def write_list_of_patients_to_file(self):
-        with open("project - classes/patients.txt", "w") as file:
+        with open("patients.txt", "w") as file:
             for patient in self.patient_list:
                 formattedpatient = self.format_patient_info_for_file(patient)
                 file.write(f'{formattedpatient}'+'\n')
@@ -251,9 +251,9 @@ class PatientManager:
         patient = self.enter_patient_info()
         formattedpatient = self.format_patient_info_for_file(patient)
         self.patient_list.append(formattedpatient)
-        with open("project - classes/patients.txt") as file:
+        with open("patients.txt") as file:
             text = file.read()
-        with open("project - classes/patients.txt", "a") as file:
+        with open("patients.txt", "a") as file:
             if not text.endswith("\n"):
                 file.write("\n")
             file.write(f"{formattedpatient}")
