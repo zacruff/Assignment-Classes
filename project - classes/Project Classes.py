@@ -269,47 +269,64 @@ class Management:
             print("Welcome to Alberta Hospital (AH) Management System")
             print("Select from the following options, or select 3 to stop:")
             print("1 - Doctors\n2 - Patients\n3 - Exit Program")
-            menu_option = int(input(">>> "))
-            if menu_option == 1:
-                while True:
-                    dManager = DoctorManager()
-                    print("\nDoctors Menu:")
-                    print("1 - Display Doctors list\n2 - Search for doctor by ID\n3 - Search for doctor by name\n4 - Add doctor\n5 - Edit doctor info\n6 - Back to Main Menu")
-                    doctor_option = int(input(">>> "))
-                    if doctor_option == 1:
-                        dManager.display_doctors_list()
-                    elif doctor_option == 2:
-                        dManager.search_doctor_by_id()
-                    elif doctor_option == 3:
-                        dManager.search_doctor_by_name()
-                    elif doctor_option == 4:
-                        dManager.add_dr_to_file()
-                    elif doctor_option == 5:
-                        dManager.edit_doctor_info()
-                    elif doctor_option == 6:
-                        print("\n")
-                        break            
-            if menu_option == 2:
-                while True:
-                    pManager = PatientManager()
-                    print("\nPatients Menu:")
-                    print("1 - Display Patients list\n2 - Search for patient by ID\n3 - Add patient\n4 - Edit patient info\n5 - Back to the Main Menu")
-                    patient_option = int(input(">>> "))
-                    if patient_option == 1:
-                        pManager.display_patients_list()
-                    elif patient_option == 2:
-                        pManager.search_patient_by_id()
-                    elif patient_option == 3:
-                        pManager.add_patient_to_file()
-                    elif patient_option == 4:
-                        pManager.edit_patient_info_by_id()
-                    elif patient_option == 5:
-                        print("\n")
-                        break
-            elif menu_option == 3:
-                print("Thank you for using the program. Bye!")
-                break
-
+            menu_option = input(">>> ")
+            try:
+                menu_option = int(menu_option)
+                if menu_option == 1:
+                    while True:
+                        dManager = DoctorManager()
+                        print("\nDoctors Menu:")
+                        print("1 - Display Doctors list\n2 - Search for doctor by ID\n3 - Search for doctor by name\n4 - Add doctor\n5 - Edit doctor info\n6 - Back to Main Menu")
+                        doctor_option = input(">>> ")
+                        try:
+                            doctor_option = int(doctor_option)
+                            if doctor_option == 1:
+                                dManager.display_doctors_list()
+                            elif doctor_option == 2:
+                                dManager.search_doctor_by_id()
+                            elif doctor_option == 3:
+                                dManager.search_doctor_by_name()
+                            elif doctor_option == 4:
+                                dManager.add_dr_to_file()
+                            elif doctor_option == 5:
+                                dManager.edit_doctor_info()
+                            elif doctor_option == 6:
+                                print("\n")
+                                break
+                            elif doctor_option < 1 or doctor_option > 6:
+                                print("Invalid input\n")
+                        except ValueError:
+                            print("Invalid input.\n")                  
+                if menu_option == 2:
+                    while True:
+                        pManager = PatientManager()
+                        print("\nPatients Menu:")
+                        print("1 - Display Patients list\n2 - Search for patient by ID\n3 - Add patient\n4 - Edit patient info\n5 - Back to the Main Menu")
+                        patient_option = input(">>> ")
+                        try:
+                            patient_option = int(patient_option)
+                            if patient_option == 1:
+                                pManager.display_patients_list()
+                            elif patient_option == 2:
+                                pManager.search_patient_by_id()
+                            elif patient_option == 3:
+                                pManager.add_patient_to_file()
+                            elif patient_option == 4:
+                                pManager.edit_patient_info_by_id()
+                            elif patient_option == 5:
+                                print("\n")
+                                break
+                            elif patient_option < 1 or patient_option > 6:
+                                print("Invalid input\n")  
+                        except ValueError:
+                            print("Invalid input.\n")
+                elif menu_option == 3:
+                    print("Thank you for using the program. Bye!")
+                    break
+                elif menu_option < 1 or menu_option > 3:
+                    print("Invalid input.\n")
+            except ValueError:
+                print("Invalid input.\n")
 manager = Management()
 
 manager.display_menu()
