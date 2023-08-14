@@ -328,5 +328,4 @@ class Management:
             except ValueError:
                 print("Invalid input.\n")
 manager = Management()
-
 manager.display_menu()
